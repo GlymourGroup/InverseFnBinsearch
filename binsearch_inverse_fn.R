@@ -23,7 +23,14 @@ function(){
   binsearch_fn <- function(f,a,b,target,tol=0.001,m=100){
     bisection(function(z){target-f(z)},a,b,tol=tol,m=m)
   }
-  return(binsearch_fn)
+  binsearch_fn_vectorized <- function(f,a,b,targetVector,tol=0.001,m=100){
+    sapply(targetVector,
+           function(y){
+             binsearch_fn(f,a=a,b=b,target=y,tol=tol,m=m)
+             }
+    )
+  }
+  return(binsearch_fn_vectorized)
 }
 
 
